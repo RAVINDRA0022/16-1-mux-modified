@@ -1,0 +1,48 @@
+`timescale 1ns / 1ps
+
+module modified_mux_tb();
+
+    reg clk;              
+    reg [16:1] in;      
+    reg [3:0] sel;        
+    wire out;           
+
+    modified_mux uut (
+        .clk(clk), 
+        .in(in), 
+        .sel(sel), 
+        .out(out)
+    );
+
+    always begin
+        clk = 0; #5;
+        clk = 1; #5;
+    end
+
+    initial begin
+        
+        in = 16'b0000000000000001; // Example input: only the first bit high
+        sel = 4'b0000;       
+        
+        // Apply different select lines and input values
+        #10 sel = 4'b0001;
+        #10 sel = 4'b0010;
+        #10 sel = 4'b0011;
+        #10 sel = 4'b0100;
+        #10 sel = 4'b0101;
+        #10 sel = 4'b0110;
+        #10 sel = 4'b0111;
+        #10 sel = 4'b1000;
+        #10 sel = 4'b1001;
+        #10 sel = 4'b1010;
+        #10 sel = 4'b1011;
+        #10 sel = 4'b1100;
+        #10 sel = 4'b1101;
+        #10 sel = 4'b1110;
+        #10 sel = 4'b1111;
+
+        // Stop simulation
+        $stop;
+    end
+
+endmodule
